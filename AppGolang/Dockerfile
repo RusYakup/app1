@@ -11,11 +11,6 @@ RUN apt-get update
 RUN apt-get install Sudo
 
 
-FROM alpine
-RUN apt-get update && apt-get install -y \
-curl
-CMD /bin/bash
-
 
 FROM scratch
 COPY --from=builder /build/main /build/index.html ./

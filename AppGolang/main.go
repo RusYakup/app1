@@ -1,24 +1,39 @@
 package main
 
 import (
+	_ "go/ast"
+	"html/template"
+	"log"
 	"net/http"
-
-	"github.com/gin-gonic/gin"
+	"os"
 )
 
-func HelloWorld(c *gin.Context) {
-	c.HTML(http.StatusOK, "index.html", gin.H{
-		"title": "Hello world",
-	})
-}
 
-func main() {
-	r := gin.Default()
-	r.LoadHTMLFiles("index.html")
-	r.GET("/", HelloWorld)
+func main()  {
+	http.HandleFunc("/", HelloWorldHandler)
 
-	err := r.Run()
+	port := ":9090"
+	println("server listen port", port)
+	err := http.ListenAndServe(port,nil)
 	if err != nil {
-		panic(err)
+		log.Fatal("App failed with error:", err)
+	}
+}
+func HelloWorldHandler(w http.ResponseWriter, r *http.Request) {
+	path, err := os.Getwd()
+	if err != nil {
+		http.Error(w, err.Error(), 400)
+		return
+	}
+	filepath := path + "/index.html"
+
+	tmpl, err := template.ParseFiles(filepath)
+	if err!= nil {
+		http.Error(w, err.Error(), 400)
+		return
+	}
+	if err:= tmpl.Execute(w, nil); err !=nil {
+		http.Error(w, err.Error(), 400)
+		return
 	}
 }

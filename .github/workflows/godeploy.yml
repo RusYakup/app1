@@ -94,7 +94,7 @@ jobs:
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
       with:
         task-definition: ${{ steps.task-def.outputs.task-definition }}
-        service: exam-devops-service
+        service: exam-devops-container-service
         cluster: exam-devops-cluster
         wait-for-service-stability: true
         

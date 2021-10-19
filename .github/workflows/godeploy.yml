@@ -1,5 +1,6 @@
 name: Go
-
+env: 
+  AWS_REGION_NAME: "eu-central-1"
 on:
   push:
     branches  : [ main ]
@@ -62,7 +63,7 @@ jobs:
       with:
         aws-access-key-id    : ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
-        aws-region           : eu-central-1
+        aws-region           : ${{ env.AWS_REGION_NAME}}
         
     - name: Login to Amazon ECR
       id  : login-ecr

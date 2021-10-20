@@ -2,4 +2,4 @@
 
 
 Status of Last Feployment:<br>
-<img src="https://github.com/RusYakup/app1/workflow/Go/badge.svg?branch=master">
+<img src="https://github.com/RusYakup/app1/workflow/Go/badge.svg?branch=master"><br>

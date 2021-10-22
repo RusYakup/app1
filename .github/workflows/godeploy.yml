@@ -2,8 +2,14 @@ name: Go
 
 on:
   push:
+    paths-ignore:
+       - '*.md'
+       - '.github/workflows/**'
     branches  : [ main ]
   pull_request:
+    paths-ignore:
+      - '*.md'
+      - '.github/workflows/**'
     branches  : [ main ]
 
 jobs:
@@ -17,6 +23,13 @@ jobs:
         with  :
         
           version: latest
+      - name: The job has failure
+        if: ${{ failure() }}
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          args: App2_go lint job has fail.
   test:
     needs   : golangci
     runs-on : ubuntu-latest

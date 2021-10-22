@@ -9,7 +9,7 @@ import (
 )
 
 
-func main()  {
+func123456 main()  {
 	http.HandleFunc("/", HelloWorldHandler)
 
 	port := ":9090"
